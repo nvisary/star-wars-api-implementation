@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
+
 import { People, usePeopleInfinite } from "../../api";
 import { FetchMore } from "../../common/FetchMore";
 import { PeopleCard } from "../PeopleCard/PeopleCard";

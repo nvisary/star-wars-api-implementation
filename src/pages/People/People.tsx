@@ -12,6 +12,29 @@ import { PlanetCard } from "../../components/PlanetCard";
 import { StarshipCard } from "../../components/StarshipCard";
 import { VehicleCard } from "../../components/VehicleCard";
 
+function Section({
+  dataUrls,
+  header,
+  content,
+}: {
+  dataUrls?: string[];
+  header: string;
+  content: React.ReactNode;
+}) {
+  if (!dataUrls?.length) {
+    return null;
+  }
+
+  return (
+    <div className={styles.section}>
+      <Heading size="lg" as="h2">
+        {header}
+      </Heading>
+      <div className={styles.list}>{content}</div>
+    </div>
+  );
+}
+
 export function People() {
   const navigate = useNavigate();
   const { name } = useParams();
@@ -45,42 +68,40 @@ export function People() {
           <PlanetCard url={people.homeworld} />
         </div>
       )}
-      {people?.films && people.films.length > 0 && (
-        <div className={styles.section}>
-          <Heading size="lg" as="h2">
-            Films
-          </Heading>
-          <div className={styles.list}>
-            {people.films.map((url) => (
-              <FilmCard key={url} url={url} />
+      <Section
+        header="Films"
+        dataUrls={people?.films}
+        content={
+          <>
+            {people?.films.map((url) => (
+              <FilmCard url={url} key={url} />
             ))}
-          </div>
-        </div>
-      )}
-      {people?.starships && people.starships.length > 0 && (
-        <div className={styles.section}>
-          <Heading size="lg" as="h2">
-            Starships
-          </Heading>
-          <div className={styles.list}>
-            {people.starships.map((url) => (
+          </>
+        }
+      />
+
+      <Section
+        header="Starships"
+        dataUrls={people?.starships}
+        content={
+          <>
+            {people?.starships.map((url) => (
               <StarshipCard key={url} url={url} />
             ))}
-          </div>
-        </div>
-      )}
-      {people?.vehicles && people.vehicles.length > 0 && (
-        <div className={styles.section}>
-          <Heading size="lg" as="h2">
-            Vehicles
-          </Heading>
-          <div className={styles.list}>
-            {people.vehicles.map((url) => (
+          </>
+        }
+      />
+      <Section
+        header="Vehicles"
+        dataUrls={people?.vehicles}
+        content={
+          <>
+            {people?.vehicles.map((url) => (
               <VehicleCard key={url} url={url} />
             ))}
-          </div>
-        </div>
-      )}
+          </>
+        }
+      />
     </div>
   );
 }
