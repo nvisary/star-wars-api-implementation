@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 16px 20px 20px 20px;
+  width: 400px;
+  border-radius: 8px;
+}
+
+.dates {
+  margin-top: 10px;
+  align-self: flex-end;
+}
